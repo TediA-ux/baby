@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3 class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white">
+        Check in Baby
+    </h3>
+    <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl px-16 dark:text-gray-400">
+        Fill in the check in details for {{ baby.full_name }}
+    </p>
+    <form action="/babies/{{ baby.pk }}/check-in/"
+          method="POST"
+          class="mx-4 w-full">
+        {% csrf_token %}
+        <input type="hidden" name="baby" value="{{ baby.pk }}" />
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div>
+                <label for="drop_off_person_name"
+                       class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">
+                    Drop off person name
+                </label>
+                <input type="text"
+                       id="drop_off_person_name"
+                       name="drop_off_person_name"
+                       value="{% firstof form.drop_off_person_name.value %}"
+                       class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+                       placeholder="John Doe" />
+                {% if "drop_off_person_name" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.drop_off_person_name.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="arrival_time"
+                       class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">Arrival Time</label>
+                <input type="datetime-local"
+                       id="arrival_time"
+                       name="arrival_time"
+                       value="{% firstof form.arrival_time.value %}"
+                       class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white" />
+                {% if "arrival_time" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.arrival_time.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="period_of_stay"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Select Period of Stay
+                </label>
+                <select id="period_of_stay"
+                        name="period_of_stay"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option selected>Select period of stay</option>
+                    {% for period, _ in period_of_stay_choices %}
+                        <option
+                            value="{{ period }}"
+                            {%
+                            if
+                            form.period_of_stay.value=""
+                            ="period"
+                            %}
+                            selected
+                            {%
+                            endif
+                            %}
+                            >{{ period }}</option>
+                    {% endfor %}
+                </select>
+                {% if "period_of_stay" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.period_of_stay.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="baby_sitter"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Baby Sitter</label>
+                <select id="baby_sitter"
+                        name="baby_sitter"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option selected>Select baby sitter</option>
+                    {% for baby_sitter in active_baby_sitters %}
+                        <option
+                            value="{{ baby_sitter.pk }}"
+                            {%
+                            if
+                            form.baby_sitter.value=""
+                            ="baby_sitter.pk"
+                            %}
+                            selected
+                            {%
+                            endif
+                            %}
+                            >{{ baby_sitter.first_name }} {{ baby_sitter.last_name }}</option>
+                    {% endfor %}
+                </select>
+                {% if "baby_sitter" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.baby_sitter.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="comment"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comment (Optional)</label>
+                <textarea id="comment"
+                          name="comment"
+                          value="{% firstof form.comment.value %}"
+                          class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+                          placeholder="Comment"></textarea>
+                {% if "comment" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.comment.0 }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <button type="submit"
+                class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Check In
+        </button>
+    </form>
+{% endblock content %}

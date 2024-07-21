@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3 class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white">
+        {% if pk %}
+            Edit
+        {% else %}
+            Add
+        {% endif %}
+        baby sitter
+    </h3>
+    <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl px-16 dark:text-gray-400">
+        Fill in the baby sitter's details
+    </p>
+    <form action="/baby-sitters/{% if pk %}{{ form.instance.id }}{% else %}{{"add"}}{% endif %}/{% if pk %}{{"edit/"}}{% endif %}" method="POST" class="mx-4 w-full">
+        {% csrf_token %}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div>
+                <label for="first_name"
+                       class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">First Name</label>
+                <input type="text"
+                       id="first_name"
+                       name="first_name"
+                       value="{% firstof form.first_name.value %}"
+                       class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+                       placeholder="John" />
+                {% if "first_name" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.first_name.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="last_name"
+                       class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">Last Name</label>
+                <input type="text"
+                       id="last_name"
+                       name="last_name"
+                       value="{% firstof form.last_name.value %}"
+                       class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+                       placeholder="John" />
+                {% if "last_name" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.last_name.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="location"
+                       class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">Location</label>
+                <input type="text"
+                       id="location"
+                       name="location"
+                       value="{% firstof form.location.value %}"
+                       class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+                       placeholder="Kabalagala" />
+                {% if "location" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.location.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="date_of_birth"
+                       class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">Date of Birth</label>
+                <input type="date"
+                       id="date_of_birth"
+                       name="date_of_birth"
+                       value="{% firstof form.date_of_birth.value %}"
+                       class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+                       placeholder="2" />
+                {% if "date_of_birth" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.date_of_birth.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="gender"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select gender</label>
+                <select id="gender"
+                        name="gender"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option selected>Select gender</option>
+                    <option value="Male" {% if form.gender.value == "Male" %}selected{% endif %}>Male</option>
+                    <option value="Female"
+                            {% if form.gender.value == "Female" %}selected{% endif %}>Female</option>
+                </select>
+                {% if "gender" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.gender.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="next_of_kin_name"
+                       class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">Next of Kin</label>
+                <input type="text"
+                       id="next_of_kin_name"
+                       name="next_of_kin_name"
+                       value="{% firstof form.next_of_kin_name.value %}"
+                       class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+                       placeholder="John Doe" />
+                {% if "next_of_kin_name" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.next_of_kin_name.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="nin"
+                       class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">National ID Number</label>
+                <input type="text"
+                       id="nin"
+                       name="nin"
+                       value="{% firstof form.nin.value %}"
+                       class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+                       placeholder="CF123456789012" />
+                {% if "nin" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.nin.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="religion"
+                       class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">Religion (Optional)</label>
+                <input type="text"
+                       id="religion"
+                       name="religion"
+                       value="{% firstof form.religion.value %}"
+                       class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+                       placeholder="Christian" />
+                {% if "religion" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.religion.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="level_of_education"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Select Highest Level of Education
+                </label>
+                <select id="level_of_education"
+                        name="level_of_education"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option selected>Select level of education</option>
+                    {% for level, _ in level_of_education_choices %}
+                        <option value="{{ level }}"
+                                {% if form.level_of_education.value == level %}selected{% endif %}>{{ level }}</option>
+                    {% endfor %}
+                </select>
+                {% if "level_of_education" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.level_of_education.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="contact"
+                       class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">Contact</label>
+                <input type="text"
+                       id="contact"
+                       name="contact"
+                       value="{% firstof form.contact.value %}"
+                       class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+                       placeholder="0771234567" />
+                {% if "contact" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.contact.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="recommender_name"
+                       class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">Recommender Name</label>
+                <input type="text"
+                       id="recommender_name"
+                       name="recommender_name"
+                       value="{% firstof form.recommender_name.value %}"
+                       class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+                       placeholder="John Doe" />
+                {% if "recommender_name" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.recommender_name.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="is_off_duty"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Select Off Duty Status
+                </label>
+                <select id="is_off_duty"
+                        name="is_off_duty"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option selected>Select off duty status</option>
+                    <option value="False" {% if not form.is_off_duty.value %}selected{% endif %}>No</option>
+                    <option value="True" {% if form.is_off_duty.value %}selected{% endif %}>Yes</option>
+                </select>
+                {% if "is_off_duty" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.is_off_duty.0 }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <button type="submit"
+                class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Submit
+        </button>
+    </form>
+{% endblock content %}

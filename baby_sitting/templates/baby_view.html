@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+<dl
+  class="max-w-md grid-cols-1 md:grid-cols-2 gap-4 text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700"
+>
+  <div class="flex flex-col pb-3">
+    <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Full Name</dt>
+    <dd class="text-lg font-semibold">{{instance.full_name}}</dd>
+  </div>
+  <div class="flex flex-col py-3">
+    <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Age</dt>
+    <dd class="text-lg font-semibold">{{instance.age}} year(s)</dd>
+  </div>
+  <div class="flex flex-col py-3">
+    <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Gender</dt>
+    <dd class="text-lg font-semibold">{{instance.gender}}</dd>
+  </div>
+  <div class="flex flex-col pt-3">
+    <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+      Parent Name
+    </dt>
+    <dd class="text-lg font-semibold">{{instance.parent_name}}</dd>
+  </div>
+  <div class="flex flex-col pt-3">
+    <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Location</dt>
+    <dd class="text-lg font-semibold">{{instance.location}}</dd>
+  </div>
+</dl>
+{% endblock %}

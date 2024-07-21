@@ -1,0 +1,124 @@
+{% extends "base.html" %} {% block content %}
+<h3
+  class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white"
+>
+  Add baby
+</h3>
+<p
+  class="mb-6 text-lg font-normal text-gray-500 lg:text-xl px-16 dark:text-gray-400"
+>
+  Fill in the baby's details
+</p>
+<form action="/babies/add/" method="POST" class="mx-4 w-full">
+  {% csrf_token %}
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div>
+      <label
+        for="full_name"
+        class="block mb-2 text-sm font-medium text-gray-700 dark:text-white"
+        >Full name</label
+      >
+      <input
+        type="text"
+        id="full_name"
+        name="full_name"
+        value="{% firstof form.full_name.value %}"
+        class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+        placeholder="John Doe"
+      />
+      {% if "full_name" in form.errors %}
+      <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+        {{form.errors.full_name.0}}
+      </p>
+      {% endif %}
+    </div>
+    <div>
+      <label
+        for="location"
+        class="block mb-2 text-sm font-medium text-gray-700 dark:text-white"
+        >Location</label
+      >
+      <input
+        type="text"
+        id="location"
+        name="location"
+        value="{% firstof form.location.value %}"
+        class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+        placeholder="Kabalagala"
+      />
+      {% if "location" in form.errors %}
+      <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+        {{form.errors.location.0}}
+      </p>
+      {% endif %}
+    </div>
+    <div>
+      <label
+        for="age"
+        class="block mb-2 text-sm font-medium text-gray-700 dark:text-white"
+        >Age</label
+      >
+      <input
+        type="number"
+        id="age"
+        name="age"
+        value="{% firstof form.age.value %}"
+        class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+        placeholder="2"
+      />
+      {% if "age" in form.errors %}
+      <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+        {{form.errors.age.0}}
+      </p>
+      {% endif %}
+    </div>
+    <div>
+      <label
+        for="gender"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Select gender</label
+      >
+      <select
+        id="gender"
+        name="gender"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      >
+        <option selected>Select gender</option>
+        <option value="Male" {% if form.gender.value == "Male" %} selected {% endif %}>Male</option>
+        <option value="Female" {% if form.gender.value == "Female" %} selected {% endif %}>Female</option>
+      </select>
+      {% if "gender" in form.errors %}
+      <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+        {{form.errors.gender.0}}
+      </p>
+      {% endif %}
+    </div>
+    <div>
+      <label
+        for="parent_name"
+        class="block mb-2 text-sm font-medium text-gray-700 dark:text-white"
+        >Parent Name</label
+      >
+      <input
+        type="text"
+        id="parent_name"
+        name="parent_name"
+        value="{% firstof form.parent_name.value %}"
+        class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+        placeholder="John Doe"
+      />
+      {% if "parent_name" in form.errors %}
+      <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+        {{form.errors.parent_name.0}}
+      </p>
+      {% endif %}
+    </div>
+  </div>
+  <button
+    type="submit"
+    class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+  >
+    Submit
+  </button>
+</form>
+{% endblock content %}

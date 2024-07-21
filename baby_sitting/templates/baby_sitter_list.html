@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3 class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white">
+        Baby Sitters
+    </h3>
+    <div class="flex float-right md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <a href="/baby-sitters/add/"
+           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Add Baby Sitter
+        </a>
+    </div>
+    <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl px-16 dark:text-gray-400">
+        The list of baby sitters at DayStar
+    </p>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Full Name</th>
+                    <th scope="col" class="px-6 py-3">Gender</th>
+                    <th scope="col" class="px-6 py-3">Location</th>
+                    <th scope="col" class="px-6 py-3">Level of Education</th>
+                    <th scope="col" class="px-6 py-3">Is off duty</th>
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Action</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for baby_sitter in queryset %}
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ baby_sitter.first_name }} {{ baby_sitter.last_name }}
+                        </th>
+                        <td class="px-6 py-4">{{ baby_sitter.gender }}</td>
+                        <td class="px-6 py-4">{{ baby_sitter.location }}</td>
+                        <td class="px-6 py-4">{{ baby_sitter.level_of_education }}</td>
+                        <td class="px-6 py-4">{{ baby_sitter.is_off_duty|yesno:"Yes,No" }}</td>
+                        <td class="px-6 py-4 text-right">
+                            <a href="/baby-sitters/{{ baby_sitter.id }}/"
+                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a> |
+                            <a href="/baby-sitters/{{ baby_sitter.id }}/edit/"
+                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

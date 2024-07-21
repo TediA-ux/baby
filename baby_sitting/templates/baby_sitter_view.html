@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+    <dl class="max-w-md grid-cols-1 md:grid-cols-2 gap-4 text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+        <div class="flex flex-col pb-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">First Name</dt>
+            <dd class="text-lg font-semibold">
+                {{ instance.first_name }}
+            </dd>
+        </div>
+        <div class="flex flex-col py-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Last Name</dt>
+            <dd class="text-lg font-semibold">
+                {{ instance.last_name }}
+            </dd>
+        </div>
+        <div class="flex flex-col py-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Gender</dt>
+            <dd class="text-lg font-semibold">
+                {{ instance.gender }}
+            </dd>
+        </div>
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Date of Birth</dt>
+            <dd class="text-lg font-semibold">
+                {{ instance.date_of_birth }}
+            </dd>
+        </div>
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Location</dt>
+            <dd class="text-lg font-semibold">
+                {{ instance.location }}
+            </dd>
+        </div>
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Next of Kin</dt>
+            <dd class="text-lg font-semibold">
+                {{ instance.next_of_kin_name }}
+            </dd>
+        </div>
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">NIN</dt>
+            <dd class="text-lg font-semibold">
+                {{ instance.nin }}
+            </dd>
+        </div>
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Recommender</dt>
+            <dd class="text-lg font-semibold">
+                {{ instance.recommender_name }}
+            </dd>
+        </div>
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Level of Education</dt>
+            <dd class="text-lg font-semibold">
+                {{ instance.level_of_education }}
+            </dd>
+        </div>
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Contact</dt>
+            <dd class="text-lg font-semibold">
+                {{ instance.contact }}
+            </dd>
+        </div>
+        <div class="flex flex-col pt-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Is off duty</dt>
+            <dd class="text-lg font-semibold">
+                {{ instance.is_off_duty|yesno:"Yes,No" }}
+            </dd>
+        </div>
+    </dl>
+{% endblock %}

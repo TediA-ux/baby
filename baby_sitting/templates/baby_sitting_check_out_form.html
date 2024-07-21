@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3 class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white">
+        Check out Baby
+    </h3>
+    <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl px-16 dark:text-gray-400">
+        Fill in the check out details for {{ form.instance.baby.full_name }}
+    </p>
+    <form action="/baby-sittings/{{ form.instance.pk }}/check-out/"
+          method="POST"
+          class="mx-4 w-full">
+        {% csrf_token %}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div>
+                <label for="pick_up_person_name"
+                       class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">
+                    Pick up person name
+                </label>
+                <input type="text"
+                       id="pick_up_person_name"
+                       name="pick_up_person_name"
+                       value="{% firstof form.pick_up_person_name.value %}"
+                       class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+                       placeholder="John Doe" />
+                {% if "pick_up_person_name" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.pick_up_person_name.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="departure_time"
+                       class="block mb-2 text-sm font-medium text-gray-700 dark:text-white">Departure Time</label>
+                <input type="datetime-local"
+                       id="departure_time"
+                       name="departure_time"
+                       value="{% firstof form.departure_time.value %}"
+                       class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white" />
+                {% if "departure_time" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.departure_time.0 }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label for="comment"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comment (Optional)</label>
+                <textarea id="comment"
+                          name="comment"
+                          value="{% firstof form.comment.value %}"
+                          class="bg-gray-700 border border-gray-700 text-gray-700 placeholder-gray-500 text-sm rounded-lg focus:ring-gray-700 dark:bg-gray-700 focus:border-gray-700 block w-full p-2.5 dark:text-white dark:placeholder-gray-500 dark:border-white"
+                          placeholder="Comment"></textarea>
+                {% if "comment" in form.errors %}
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ form.errors.comment.0 }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <button type="submit"
+                class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Check Out
+        </button>
+    </form>
+{% endblock content %}
